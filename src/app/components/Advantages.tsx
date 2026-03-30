@@ -1,54 +1,91 @@
-import { Truck, ShieldCheck, Headphones, Award } from "lucide-react";
+import { Truck, BadgeDollarSign, ShieldCheck, Headphones } from "lucide-react";
+import { motion } from "motion/react";
 
 const advantages = [
   {
     icon: Truck,
-    title: "Entrega Rápida",
-    description: "Receba seus materiais em até 48h para sua região",
+    title: "Frete Gratis",
+    description: "Entrega gratuita para compras acima de R$ 299 em toda a regiao",
+  },
+  {
+    icon: BadgeDollarSign,
+    title: "Melhor Preco",
+    description: "Garantia do menor preco. Encontrou mais barato? A gente cobre",
   },
   {
     icon: ShieldCheck,
-    title: "Pagamento Seguro",
-    description: "Suas transações protegidas com criptografia",
+    title: "Qualidade Certificada",
+    description: "Trabalhamos apenas com marcas reconhecidas e certificadas no mercado",
   },
   {
     icon: Headphones,
-    title: "Atendimento Especializado",
-    description: "Equipe técnica pronta para ajudar no seu projeto",
-  },
-  {
-    icon: Award,
-    title: "Produtos de Qualidade",
-    description: "Trabalhamos apenas com marcas reconhecidas",
+    title: "Entrega Rapida",
+    description: "Receba seus materiais em tempo recorde para nao parar sua obra",
   },
 ];
 
 export function Advantages() {
   return (
-    <section className="py-16 bg-[#1a1a1a]">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl text-white mb-2">
-            Por que comprar na ConstruMax?
+    <section className="py-16 bg-[#1A1A1A] relative overflow-hidden">
+      {/* Subtle diagonal stripes background */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
+        background: 'repeating-linear-gradient(135deg, #FFC107, #FFC107 2px, transparent 2px, transparent 30px)'
+      }} />
+
+      {/* Top hazard stripe */}
+      <div className="absolute top-0 left-0 right-0 h-1.5" style={{
+        background: 'repeating-linear-gradient(135deg, #FFC107, #FFC107 10px, #1A1A1A 10px, #1A1A1A 20px)'
+      }} />
+
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h2
+            className="text-2xl md:text-3xl font-black text-white mb-2 uppercase tracking-tight"
+            style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+          >
+            Por que comprar na <span className="text-[#FFC107]">ConstruMax</span>?
           </h2>
+          <div className="w-20 h-1.5 mx-auto mb-3" style={{
+            background: 'repeating-linear-gradient(90deg, #FFC107, #FFC107 8px, transparent 8px, transparent 12px)'
+          }} />
           <p className="text-gray-400">Vantagens exclusivas para nossos clientes</p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {advantages.map((adv) => (
-            <div
+          {advantages.map((adv, index) => (
+            <motion.div
               key={adv.title}
-              className="bg-[#2a2a2a] border border-[#3a3a3a] rounded-xl p-6 text-center hover:border-[#f5c518]/50 transition-colors group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="bg-[#222222] border-2 border-[#333] p-6 text-center hover:border-[#FFC107] transition-all duration-300 group"
             >
-              <div className="w-14 h-14 bg-[#f5c518]/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-[#f5c518]/20 transition-colors">
-                <adv.icon className="w-7 h-7 text-[#f5c518]" />
+              <div className="w-16 h-16 bg-[#FFC107] flex items-center justify-center mx-auto mb-4 group-hover:bg-[#FFD600] transition-all duration-300">
+                <adv.icon className="w-8 h-8 text-[#1A1A1A] transition-colors duration-300" />
               </div>
-              <h3 className="text-white mb-2">{adv.title}</h3>
-              <p className="text-sm text-gray-400">{adv.description}</p>
-            </div>
+              <h3
+                className="text-white font-bold uppercase tracking-wide mb-2"
+                style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+              >
+                {adv.title}
+              </h3>
+              <p className="text-sm text-gray-400 leading-relaxed">{adv.description}</p>
+            </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Bottom hazard stripe */}
+      <div className="absolute bottom-0 left-0 right-0 h-1.5" style={{
+        background: 'repeating-linear-gradient(135deg, #FFC107, #FFC107 10px, #1A1A1A 10px, #1A1A1A 20px)'
+      }} />
     </section>
   );
 }
